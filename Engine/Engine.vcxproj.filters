@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Subsytem Interfaces">
+      <UniqueIdentifier>{4e68c138-edc0-4fb2-956d-4b13c43de54b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Subsystem Interfaces">
+      <UniqueIdentifier>{a42c439c-8aa3-4122-9d66-54f7c6ad836d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Events">
+      <UniqueIdentifier>{99d1abbf-da83-426b-9758-1668b6da215d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Subsystems">
+      <UniqueIdentifier>{2ba816a8-88f6-4f15-b675-6a5465ec95d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Subsystems\SDL">
+      <UniqueIdentifier>{640f12ca-d643-40b6-8314-64640518ec77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Subsystems\SoLoud">
+      <UniqueIdentifier>{d734a8e8-1b09-496c-8b6e-200ab0485ddf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Subsystems">
+      <UniqueIdentifier>{d476f769-a099-460e-9901-070262f3077f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Subsystems\SDL">
+      <UniqueIdentifier>{333a9a1f-3c99-4c4d-a21a-bb9adf3c9734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Subsystems\SoLoud">
+      <UniqueIdentifier>{a189b064-d7b9-47e5-94fc-a9fc73969f0f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineEntry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem_SDL.cpp">
+      <Filter>Source Files\Subsystems\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemsLocator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Subsystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowSystem_SDL.cpp">
+      <Filter>Source Files\Subsystems\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSystem_SoLoud.cpp">
+      <Filter>Source Files\Subsystems\SoLoud</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowSystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem_SDL_GL.cpp">
+      <Filter>Source Files\Subsystems\SDL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem_SDL.h">
+      <Filter>Header Files\Subsystems\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem_SoLoud.h">
+      <Filter>Header Files\Subsystems\SoLoud</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemsLocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Subsystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowSystem_SDL.h">
+      <Filter>Header Files\Subsystems\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowSystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowEvents.h">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem_SDL_GL.h">
+      <Filter>Header Files\Subsystems\SDL</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
