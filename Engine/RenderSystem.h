@@ -14,6 +14,7 @@ namespace Engine::Internal {
 		RenderSystem() { type_ = SubsytemType::RENDER; }
 		virtual int		CreateRenderer()						= 0;
 		virtual void	Clear()									= 0;
+		virtual void	Render()									= 0;
 		virtual void	Display()								= 0;
 		virtual void	DrawLine(int x1, int y1, int x2, int y2) = 0;
 	};

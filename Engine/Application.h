@@ -16,7 +16,7 @@ namespace Engine::App {
 		/// <summary>
 		/// Render logic
 		/// </summary>
-		virtual void Render() = 0;
+		//virtual void Render() = 0;
 	};
 	
 	extern Application* CreateApp(int argc, char** argv);

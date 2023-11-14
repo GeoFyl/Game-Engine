@@ -76,9 +76,8 @@ void Core::Update(double dt)
 }
 void Core::Render()
 {		
-	//Somebody took my renderer!
 	SystemsAPI::Renderer()->Clear();
-	app_->Render();
+	SystemsAPI::Renderer()->Render();
 	SystemsAPI::Renderer()->Display();
 }
 void Core::Close()

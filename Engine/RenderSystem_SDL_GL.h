@@ -22,9 +22,12 @@ namespace Engine::Internal {
 		int			CreateRenderer() final;
 		void		Clear() final;
 		void		Display() final;
+		void Render() final;
 		void		DrawLine(int x1, int y1, int x2, int y2) final;
 
 	private:
+		void Resize();
+
 		SDL_Window* window_;
 		SDL_Renderer* renderer_2D_;
 		SDL_GLContext openGL_context_;

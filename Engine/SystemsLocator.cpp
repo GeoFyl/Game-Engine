@@ -24,15 +24,17 @@ void Engine::SystemsAPI::Provide(Subsystem* subsystem) {
 }
 
 void Engine::SystemsAPI::InitialiseSubsystems() {
+	audio_system_.get()->Initialise();	
 	window_system_.get()->Initialise();
 	render_system_.get()->Initialise();
-	audio_system_.get()->Initialise();
+
 	event_system_.get()->Initialise();
 }
 
 void Engine::SystemsAPI::ShutDownSubsystems() {
-	render_system_.get()->Shutdown();
 	audio_system_.get()->Shutdown();
+	render_system_.get()->Shutdown();
+
 	event_system_.get()->Shutdown();
 	window_system_.get()->Shutdown();
 }

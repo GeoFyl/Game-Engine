@@ -22,18 +22,6 @@ RenderSystem_SDL_GL::~RenderSystem_SDL_GL()
 
 int RenderSystem_SDL_GL::Initialise()
 {
-    //OpenGL settings
-    glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
-    glClearColor(0, 0, 0, 1);			// Cornflour Blue Background
-    glClearDepth(1.0f);									// Depth Buffer Setup
-    glClearStencil(0);									// Clear stencil buffer
-    glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
-    glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
-    glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, 1);
-    glDisable(GL_LIGHTING);
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     return 0;
 }
 
@@ -75,35 +63,81 @@ int RenderSystem_SDL_GL::CreateRenderer()
         printf("OpenGL context could not be created! SDL Error: %s\n", SDL_GetError());
         return -1;
     }
-    // Define the viewport dimensions 
-    glViewport(0, 0, (GLint)SystemsAPI::Window()->GetScreenWidth(), (GLint)SystemsAPI::Window()->GetScreenHeight());
+
+    //OpenGL settings
+    glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
+    glClearColor(0, 0, 0, 1);			// Cornflour Blue Background
+    glClearDepth(1.0f);									// Depth Buffer Setup
+    glClearStencil(0);									// Clear stencil buffer
+    glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
+    glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
+    glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, 1);
+    glDisable(GL_LIGHTING);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    Resize();
+
+    return 0;
 }
 
 void RenderSystem_SDL_GL::Clear()
 {
     SDL_SetRenderDrawColor(renderer_2D_, 0x00, 0x00, 0x00, 0x00);
     SDL_RenderClear(renderer_2D_);
+
+    // Clear opengl buffers 
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(1.0f, 0, 0, 1.0f);
+}
+
+void Engine::Internal::RenderSystem_SDL_GL::Render() {
+    glLoadIdentity();
+    gluLookAt(0.0f, 0.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
 
 void RenderSystem_SDL_GL::Display()
 {
-    // Clear the colorbuffer 
-    glClearColor(0, 0, 0, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glLoadIdentity();
-    // draw OpenGL 
-    glBegin(GL_TRIANGLES);
-    glColor3f(1, 1, 1);
-    glPushMatrix();
-    //glTranslatef(0, 0, 5);
-    gluSphere(gluNewQuadric(), 2, 10, 10);
-    glPopMatrix();
-    glEnd();
 
+    // draw OpenGL 
+    glColor3f(1, 1, 1);
+    glTranslatef(0, 0, -5);
+    gluSphere(gluNewQuadric(), 2, 10, 10);
 
     SDL_GL_SwapWindow(window_);
 
-    //SDL_RenderPresent(renderer_2D_);
+   // SDL_RenderPresent(renderer_2D_);  https://gamedev.stackexchange.com/questions/157604/how-to-get-access-to-framebuffer-as-a-uint32-t-in-sdl2
+    //make as texture then display same way text was done in cmp203
+}
+
+
+void Engine::Internal::RenderSystem_SDL_GL::Resize() {
+    // Define the viewport dimensions 
+    GLint width = (GLint)SystemsAPI::Window()->GetScreenWidth();
+    GLint height = (GLint)SystemsAPI::Window()->GetScreenHeight();
+    // Prevent a divide by zero
+    if (height == 0)
+        height = 1;
+
+    float ratio = (float)width / (float)height;
+    float fov = 45.0f;
+    float nearPlane = 0.1f;
+    float farPlane = 100.0f;
+
+    // Use the Projection Matrix
+    glMatrixMode(GL_PROJECTION);
+
+    // Reset Matrix
+    glLoadIdentity();
+
+    // Set the viewport to be the entire window
+    glViewport(0, 0, width, height);
+
+    // Set the correct perspective.
+    gluPerspective(fov, ratio, nearPlane, farPlane);
+
+    // Get Back to the Modelview
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void RenderSystem_SDL_GL::DrawLine(int x1, int y1, int x2, int y2)

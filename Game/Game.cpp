@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "RenderSystem.h"
 #include <iostream>
+ 
 
 //Create the application layer
 //See Application.h
@@ -29,6 +30,7 @@ void Game::Update(double dt)
 
 void Game::Render()
 {
+
 	Engine::SystemsAPI::Renderer()->DrawLine(100, 200, 400, 700);
 	Engine::SystemsAPI::Renderer()->DrawLine(100, 200, 1200, 50);
 	Engine::SystemsAPI::Renderer()->DrawLine(1200, 50, 400, 700);
