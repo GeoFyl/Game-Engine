@@ -40,6 +40,12 @@
     <Filter Include="Header Files\Subsystems\SoLoud">
       <UniqueIdentifier>{a189b064-d7b9-47e5-94fc-a9fc73969f0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Subsystems\GL Shapes">
+      <UniqueIdentifier>{d654bc2f-54fd-4588-8976-98b6f4feb5d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Subsystems\GL Shapes">
+      <UniqueIdentifier>{742e632f-4d2d-452a-9194-6c87e9e157a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -86,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="RenderSystem_SDL_GL.cpp">
       <Filter>Source Files\Subsystems\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>Source Files\Subsystems\GL Shapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="RenderSystem_SDL_GL.h">
       <Filter>Header Files\Subsystems\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>Header Files\Subsystems\GL Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

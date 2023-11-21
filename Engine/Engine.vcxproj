@@ -153,6 +153,7 @@
     </ClCompile>
     <ClCompile Include="AudioSystem_SoLoud.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Quad.cpp" />
     <ClCompile Include="EventSystem.cpp" />
     <ClCompile Include="EventSystem_SDL.cpp" />
     <ClCompile Include="Application.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="AudioSystem_SoLoud.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="Quad.h" />
     <ClInclude Include="EventSystem.h" />
     <ClInclude Include="EventSystem_SDL.h" />
     <ClInclude Include="Engine.h" />

@@ -28,11 +28,11 @@ void Game::Update(double dt)
 	if (word > 9) word = 0;*/
 }
 
-void Game::Render()
-{
-
-	Engine::SystemsAPI::Renderer()->DrawLine(100, 200, 400, 700);
-	Engine::SystemsAPI::Renderer()->DrawLine(100, 200, 1200, 50);
-	Engine::SystemsAPI::Renderer()->DrawLine(1200, 50, 400, 700);
-	//Needs to make calls to Engine::RenderSystem clear and display 
-}
+//void Game::Render()
+//{
+//
+//	Engine::SystemsAPI::Renderer()->DrawLine(100, 200, 400, 700);
+//	Engine::SystemsAPI::Renderer()->DrawLine(100, 200, 1200, 50);
+//	Engine::SystemsAPI::Renderer()->DrawLine(1200, 50, 400, 700);
+//	//Needs to make calls to Engine::RenderSystem clear and display 
+//}

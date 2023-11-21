@@ -1,9 +1,11 @@
 #pragma once
 #include "RenderSystem.h"
+#include "Quad.h"
 
 //Forward declarations
 class SDL_Window;
 class SDL_Renderer;
+class SDL_Texture;
 typedef void* SDL_GLContext;
 
 namespace Engine::Internal {
@@ -16,7 +18,6 @@ namespace Engine::Internal {
 		int			Initialise() final;
 		int			Shutdown() final;
 
-	public:
 		//Inherited from RenderSystem interface
 		
 		int			CreateRenderer() final;
@@ -27,10 +28,18 @@ namespace Engine::Internal {
 
 	private:
 		void Resize();
+		void Render2DTarget();
 
 		SDL_Window* window_;
 		SDL_Renderer* renderer_2D_;
+		SDL_Texture* target_2D_;
+		std::unique_ptr<Quad> target_2D_quad_;
 		SDL_GLContext openGL_context_;
+
+		float ratio_;
+		float fov_ = 45.0f;
+		float nearPlane_ = 0.1f;
+		float farPlane_ = 100.0f;
     };
 }
 

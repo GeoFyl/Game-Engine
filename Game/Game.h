@@ -8,7 +8,7 @@ public:
 	Game();
 	void Start() override final;
 	void Update(double dt) override final;
-	void Render() override final;
+	//void Render() override final;
 
 private:
 
