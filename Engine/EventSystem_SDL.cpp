@@ -1,16 +1,10 @@
 #include "pch.h"
 #include "EventSystem_SDL.h"
 #include "SystemsLocator.h"
-#include <SDL.h>
+
 
 using namespace Engine::Internal;
-//We're globally instancing our subsystems!
-//But maybe you think Globals are bad
-//There might be other ways to approach this.
-//#ifdef RENDERSYSTEM_SDL
-//    EventSystem_SDL grEventSystemSDL;
-//    EventSystem* event_system_ = &grEventSystemSDL;
-//#endif
+
 EventSystem_SDL* event_SDL = new EventSystem_SDL;
 
 Engine::Internal::EventSystem_SDL::EventSystem_SDL() {
@@ -18,22 +12,27 @@ Engine::Internal::EventSystem_SDL::EventSystem_SDL() {
     event_SDL = nullptr;
 }
 
-int EventSystem_SDL::Initialise()
-{
+int EventSystem_SDL::Initialise() {
     return 0;
 }
 
-int EventSystem_SDL::Shutdown()
-{
+int EventSystem_SDL::Shutdown() {
     return 0;
 }
 
-int EventSystem_SDL::ProcessEvents()
-{
+int EventSystem_SDL::ProcessEvents() {
+
+#ifdef _WIN32||_WIN64
+    MSG msg;
+    while (PeekMessage(&msg, reinterpret_cast<HWND>(SystemsAPI::Window()->GetWindowInfo().handle), WM_KEYFIRST, 0, PM_REMOVE | PM_QS_INPUT)) {
+            HandleInputEvent(&msg);
+    }
+#endif
+
     SDL_Event e;
     //While application is running
     int returnValue = 0;
-    
+  
     //Standard SDL event system - go look at their documentation if you care!
     //Handle events on queue
     while (SDL_PollEvent(&e) != 0)
@@ -44,18 +43,8 @@ int EventSystem_SDL::ProcessEvents()
             //User requests quit
             returnValue = -1;
             break;
-        case SDL_KEYDOWN:
-            if (e.key.keysym.sym == SDLK_ESCAPE) {
-                returnValue = -1;
-            }
-            break;
-        case SDL_KEYUP:
-
-            break;
         case SDL_WINDOWEVENT:
-            //Here we're converting the SDL event into our generic Grengine event
-            //so that we can keep things nice and abstract
-            
+            //Abstract the SDL event into generic event
             WindowEvent we;
             {
                 we.event = static_cast<WindowEventID>(e.window.event);
@@ -68,7 +57,7 @@ int EventSystem_SDL::ProcessEvents()
                 we.type = e.window.type;
                 we.windowID = e.window.windowID;
             }
-            SystemsAPI::Window()->HandleWindowEvent(we);
+            HandleWindowEvent(we);
         break;
     }
 }

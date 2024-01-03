@@ -1,5 +1,6 @@
 #pragma once
 #include "EventSystem.h"
+#include <SDL.h>
 
 namespace Engine::Internal {
     /// <summary>
@@ -13,5 +14,12 @@ namespace Engine::Internal {
         int Initialise();
         int Shutdown();
         int ProcessEvents() final;
+
+    protected:
+        #ifdef _WIN32||_WIN64
+        HWND hwnd_;
+        #else
+        int msg_;
+        #endif
     };
 }

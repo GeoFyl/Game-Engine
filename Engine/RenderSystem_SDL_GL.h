@@ -1,6 +1,7 @@
 #pragma once
+#include "pch.h"
 #include "RenderSystem.h"
-#include "Quad.h"
+#include "ResourceSystem_MiniZip.h"
 
 //Forward declarations
 class SDL_Window;
@@ -14,6 +15,11 @@ namespace Engine::Internal {
 		RenderSystem_SDL_GL();
 		~RenderSystem_SDL_GL();
 
+		void ToggleLighting() { lighting_ = !lighting_; }
+		void ToggleWireframe() { wireframe_ = !wireframe_; }
+		void ToggleVsync();
+
+	private:
 		//Inherited from Subsystem interface
 		int			Initialise() final;
 		int			Shutdown() final;
@@ -24,22 +30,24 @@ namespace Engine::Internal {
 		void		Clear() final;
 		void		Display() final;
 		void Render() final;
-		void		DrawLine(int x1, int y1, int x2, int y2) final;
 
-	private:
-		void Resize();
-		void Render2DTarget();
+		void Resize(float w, float h);
 
 		SDL_Window* window_;
-		SDL_Renderer* renderer_2D_;
-		SDL_Texture* target_2D_;
-		std::unique_ptr<Quad> target_2D_quad_;
 		SDL_GLContext openGL_context_;
 
+		Engine::Components::Mesh* UI_mesh_;
+
+		float width_;
+		float height_;
 		float ratio_;
 		float fov_ = 45.0f;
 		float nearPlane_ = 0.1f;
 		float farPlane_ = 100.0f;
+
+		bool lighting_ = true;
+		bool wireframe_ = false;
+		bool vsync_ = true;
     };
 }
 

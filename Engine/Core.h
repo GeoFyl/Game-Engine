@@ -22,7 +22,7 @@ namespace Engine::Internal {
 		/// </summary>
 		/// <returns>-1 on a Quit event</returns>
 		int		ProcessEvents();
-		void	Update(double dt);
+		int 	Update(double dt);
 		void	Render();
 
 		void	Close();

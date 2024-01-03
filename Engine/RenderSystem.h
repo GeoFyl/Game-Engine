@@ -12,10 +12,18 @@ namespace Engine::Internal {
 	public:
 		//RenderSystem interface
 		RenderSystem() { type_ = SubsytemType::RENDER; }
+
+		virtual void ToggleLighting() = 0;
+		virtual void ToggleWireframe() = 0;
+		virtual void ToggleVsync() = 0;
+
+	protected:
+		friend class Core;
+		friend class WindowSystem;
 		virtual int		CreateRenderer()						= 0;
+		virtual void	Resize(float w, float h) = 0;
 		virtual void	Clear()									= 0;
 		virtual void	Render()									= 0;
 		virtual void	Display()								= 0;
-		virtual void	DrawLine(int x1, int y1, int x2, int y2) = 0;
 	};
 }

@@ -6,7 +6,12 @@ namespace Engine::Internal {
 		RENDER,
 		AUDIO,
 		EVENT,
-		WINDOW
+		WINDOW,
+		INPUT,
+		UI,
+		WORLD,
+		RESOURCE,
+		PHYSICS
 	};
 
 	/// <summary>
@@ -15,9 +20,10 @@ namespace Engine::Internal {
 	/// </summary>
 	class Subsystem {
 	public:
+	protected:
 		virtual int Initialise()	= 0;
 		virtual int Shutdown()		= 0;
-	protected:
+
 		friend class Engine::SystemsAPI;
 		void ProvideSystem(Subsystem* subsystem);
 		SubsytemType type_;

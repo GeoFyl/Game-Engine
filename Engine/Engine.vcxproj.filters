@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Header Files\Subsytem Interfaces">
       <UniqueIdentifier>{4e68c138-edc0-4fb2-956d-4b13c43de54b}</UniqueIdentifier>
     </Filter>
@@ -46,6 +42,24 @@
     <Filter Include="Source Files\Subsystems\GL Shapes">
       <UniqueIdentifier>{742e632f-4d2d-452a-9194-6c87e9e157a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Subsystems\Gainput">
+      <UniqueIdentifier>{3fa26a83-1e72-4f60-8fa2-0b1a12742b25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Subsystems\Gainput">
+      <UniqueIdentifier>{a680dcb3-a6d3-423e-a371-24d8ec34f6dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Subsystems\EnTT">
+      <UniqueIdentifier>{7ed40825-0869-4122-a89c-a0b14c301287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Subsystems\EnTT">
+      <UniqueIdentifier>{ebc59cde-5815-43c1-9b29-2dad3709627c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Subsystems\MiniZip">
+      <UniqueIdentifier>{ce74f0d9-0ca3-428f-96bc-6dca11cbfcd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Subsystems\MiniZip">
+      <UniqueIdentifier>{55278fa4-6fe5-46e9-830b-fd80adadff98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -55,9 +69,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventSystem_SDL.cpp">
@@ -96,6 +107,51 @@
     <ClCompile Include="Quad.cpp">
       <Filter>Source Files\Subsystems\GL Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem_Gainput.cpp">
+      <Filter>Source Files\Subsystems\Gainput</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceSystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSystem.cpp">
+      <Filter>Source Files\Subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldSystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldSystem_EnTT.cpp">
+      <Filter>Source Files\Subsystems\EnTT</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceSystem_MiniZip.cpp">
+      <Filter>Source Files\Subsystems\MiniZip</Filter>
+    </ClCompile>
+    <ClCompile Include="Folder.cpp">
+      <Filter>Source Files\Subsystems\MiniZip</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterfaceSystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files\Subsystems\GL Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Source Files\Subsystems\GL Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\Subsystems\GL Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>Source Files\Subsystem Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem_PhysX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterfaceSystem_SDL_GL.cpp">
+      <Filter>Source Files\Subsystems\SDL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -105,9 +161,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EventSystem_SDL.h">
@@ -149,5 +202,59 @@
     <ClInclude Include="Quad.h">
       <Filter>Header Files\Subsystems\GL Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem_Gainput.h">
+      <Filter>Header Files\Subsystems\Gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldSystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldSystem_EnTT.h">
+      <Filter>Header Files\Subsystems\EnTT</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>Header Files\Subsystems\EnTT</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSystem.h">
+      <Filter>Header Files\Subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSystem_MiniZip.h">
+      <Filter>Header Files\Subsystems\MiniZip</Filter>
+    </ClInclude>
+    <ClInclude Include="Folder.h">
+      <Filter>Header Files\Subsystems\MiniZip</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterfaceSystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterfaceSystem_SDL_GL.h">
+      <Filter>Header Files\Subsystems\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\Subsystems\GL Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files\Subsystems\GL Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Subsystems\GL Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem_PhysX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>Header Files\Subsytem Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
 </Project>

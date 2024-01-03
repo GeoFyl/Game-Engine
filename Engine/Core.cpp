@@ -1,13 +1,10 @@
 #include "pch.h"
 #include "Core.h"
-#include "RenderSystem.h"
-#include "EventSystem.h"
-#include "AudioSystem_SoLoud.h"
 #include "SystemsLocator.h"
 
-Core::Core(int argc, char** argv) :
-	app_{Engine::App::CreateApp(argc, argv)}, //Create the application layer
-	time_system_{ 60 }						//Targeting 60 frames per second
+typedef std::chrono::high_resolution_clock Clock;
+
+Core::Core(int argc, char** argv) :	app_{Engine::App::CreateApp(argc, argv)} //Create the application layer
 {
 	//Initialise Subsystems
 	//render_system_->Initialise();   //global pointer grRenderSystem is created in RenderSystem.h
@@ -18,17 +15,20 @@ Core::Core(int argc, char** argv) :
 	SystemsAPI::Provide(audio_system_.get());*/
 }
 
-void Core::OpenWindow(std::string name, int ScreenWidth, int ScreenHeight) {
-	SystemsAPI::Window()->OpenWindow(name, ScreenWidth, ScreenHeight);
-	SystemsAPI::Renderer()->CreateRenderer();
-}
+//void Core::OpenWindow(std::string name, int ScreenWidth, int ScreenHeight) {
+//	SystemsAPI::Window()->OpenWindow(name, ScreenWidth, ScreenHeight);
+//	SystemsAPI::Renderer()->CreateRenderer();
+//}
 
 //Our main loop
 int Core::Run() {
 
 	//Maybe the application layer should be in charge of calling this?
-	OpenWindow("Very cool game", 1280, 720);
+	//OpenWindow("Very cool game", 1280, 720);
 	app_->Start();
+
+	float dt = 0.f;
+	SystemsAPI::Time()->Start();
 
 	//Main loop
 	while (1) {
@@ -37,27 +37,17 @@ int Core::Run() {
 			break;
 		}
 
-		//Timing			
-		time_system_.Tick();
+		SystemsAPI::Resources()->Update();
 
-		//Work out whether we need to call Update this tick and, if so, how many times (usually 0 or 1)
-		int updateCount = time_system_.GetUpdateCount();
+		dt = SystemsAPI::Time()->Update();
 
-		//Frame
-		if (updateCount > 0) {
-			double dt = 0;	//dt == DeltaTime in seconds: How long since the last Update
+		if (SystemsAPI::Physics()->Update(dt)) {
+			SystemsAPI::World()->Update();
+		}
 
-			auto deltaTime = time_system_.Update(); //Get Delta Time in nanoseconds
 
-			//Handle the possibility that there are multiple frames to run
-			dt = std::chrono::duration_cast<std::chrono::duration<double, std::chrono::seconds::period>>(deltaTime).count();
-			dt /= updateCount;
-
-			while (updateCount > 0) {
-				//Update on a fixed timescale
-				Update(dt);
-				updateCount--;
-			}
+		if (Update(dt) == -1) {
+			break;
 		}
 
 		//Render as fast as we can
@@ -66,21 +56,22 @@ int Core::Run() {
 	Close();
 	return 0;
 }
-int Core::ProcessEvents()
-{
+int Core::ProcessEvents() {
 	return SystemsAPI::Events()->ProcessEvents();
 }
-void Core::Update(double dt)
-{
+
+int Core::Update(double dt) {
+	SystemsAPI::Input()->Update();
 	app_->Update(dt);
+	return app_->GetExitState();
 }
-void Core::Render()
-{		
+
+void Core::Render() {		
 	SystemsAPI::Renderer()->Clear();
 	SystemsAPI::Renderer()->Render();
 	SystemsAPI::Renderer()->Display();
 }
-void Core::Close()
-{
+
+void Core::Close() {
 	SystemsAPI::ShutDownSubsystems();
 }

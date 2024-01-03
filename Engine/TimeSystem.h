@@ -1,41 +1,31 @@
 #pragma once
 #include <chrono>
 namespace Engine::Internal {
-	using Clock = std::chrono::steady_clock;
+	typedef std::chrono::high_resolution_clock Clock;
+
 	/// <summary>
-	/// Quick and dirty Time system.
-	/// Manages time between "ticks" (main loops)
-	/// and "updates" (update loops)
-	/// 
+	/// A simple time system
 	/// </summary>
-	
-	//TODO: Bug where the update loop is SLOWER than intended when the application isn't doing anything
 	class TimeSystem {
 	public:
-		TimeSystem(const int targetFramesPerSecond);
+		void Start();
 		/// <summary>
 		/// Call this when performing a game Update
 		/// </summary>
-		/// <returns>The time, in nanoseconds, since the last Update</returns>
-		const std::chrono::nanoseconds	Update();
-
-		/// <summary>
-		/// Call this when processing a Tick
-		/// </summary>
-		/// <returns>The time, in nanoseconds, since the last Tick</returns>
-		const std::chrono::nanoseconds	Tick();
-
-		/// <summary>
-		/// Used to find out whether we should be performing an Update or not
-		/// </summary>
-		/// <returns> How many Updates do we need to run.
-		/// Usually 0, sometimes 1. Could be more than 1 if we've stalled.
-		/// </returns>
-		int GetUpdateCount();
+		/// <returns>The delta time, in seconds, since the last frame</returns>
+		double Update();
+		/// <returns>The delta time, in seconds, since the last frame</returns>
+		double GetDeltaTime() { return delta_time_; }
+		/// <returns>The current FPS based on the time since the last frame</returns>
+		double GetCurrentFPS() { return 1.f / delta_time_; }
+		/// <returns>The average FPS, updates every 500ms</returns>
+		double GetAvgFPS() { return avg_fps_; }
 	private:
-		std::chrono::time_point<Clock>	LastUpdateTime;
-		std::chrono::time_point<Clock>	LastTickTime;
-		std::chrono::nanoseconds		TickTime;
-		std::chrono::microseconds		TargetFrameTime;
+		Clock::time_point previous_time_;
+		double delta_time_;
+		double avg_fps_ = 0.f;
+		double fps_aggregate_ = 0.f;
+		double fps_aggregate_time_ = 0.f;
+		float update_counter_ = 0.f;
 	};
 }

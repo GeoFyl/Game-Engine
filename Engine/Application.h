@@ -1,4 +1,5 @@
 #pragma once
+
 namespace Engine::App {
 	/// <summary>
 	/// Interface to the application layer
@@ -7,16 +8,18 @@ namespace Engine::App {
 	class Application
 	{
 	public:
+		
 		/// <summary>
 		/// Game logic
 		/// </summary>
 		/// <param name="dt">Time since the last Update</param>
 		virtual void Start() = 0;
 		virtual void Update(double dt) = 0;
-		/// <summary>
-		/// Render logic
-		/// </summary>
-		//virtual void Render() = 0;
+		void Exit() { exit_state_ = -1; }
+		const int GetExitState() const { return exit_state_; }
+
+	protected:
+		int exit_state_ = 0;
 	};
 	
 	extern Application* CreateApp(int argc, char** argv);

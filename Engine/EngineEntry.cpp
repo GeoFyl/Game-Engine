@@ -1,8 +1,5 @@
 #pragma once
 #include "pch.h"
-#ifdef _WIN32||_WIN64
-#include <Windows.h>
-#endif
 
 //#include "Engine.h"
 #include "Core.h"

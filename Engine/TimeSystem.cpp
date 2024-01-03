@@ -3,30 +3,25 @@
 
 using namespace Engine::Internal;
 
-TimeSystem::TimeSystem(const int targetFramesPerSecond) : TickTime{ 0 }, TargetFrameTime{ 1000000 / 60 }
-{		
-	LastUpdateTime = LastTickTime = Clock::now();
+void Engine::Internal::TimeSystem::Start() {
+	previous_time_ = Clock::now();
 }
 
-const std::chrono::nanoseconds TimeSystem::Update()
+double TimeSystem::Update()
 {
-	auto interval = Clock::now() - LastUpdateTime;
-	LastUpdateTime = Clock::now();
-	return interval;
-}
-const std::chrono::nanoseconds TimeSystem::Tick()
-{		
-	auto interval = Clock::now() - LastTickTime;
-	LastTickTime = Clock::now();
-	TickTime += interval;
-	return interval;
-}
-int TimeSystem::GetUpdateCount()
-{
-	int updateCount = 0;
-	while (TickTime > TargetFrameTime) {
-		TickTime -= TargetFrameTime;
-		updateCount++;
+	Clock::time_point current_time = Clock::now();
+	delta_time_ = std::chrono::duration_cast<std::chrono::nanoseconds>(current_time - previous_time_).count() / 1000000000.f;
+	previous_time_ = current_time;
+
+	fps_aggregate_time_ += delta_time_;
+	fps_aggregate_ += 1.f / delta_time_;
+	update_counter_++;
+	if (fps_aggregate_time_ >= 0.5f) {
+		avg_fps_ = fps_aggregate_ / update_counter_;
+		fps_aggregate_time_ = 0.f;
+		fps_aggregate_ = 0.f;
+		update_counter_ = 0.f;
 	}
-	return updateCount;
+
+	return delta_time_;
 }
