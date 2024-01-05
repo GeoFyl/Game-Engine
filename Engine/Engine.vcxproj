@@ -79,9 +79,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)Engine\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Engine\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,7 +121,7 @@
       <PreprocessorDefinitions>RENDERSYSTEM_OPENGL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)include/PhysX;$(SolutionDir)include/boost;$(SolutionDir)include/zlib;$(SolutionDir)include/MiniZip;$(SolutionDir)include/EnTT;$(SolutionDir)include/gainput;$(SolutionDir)include/SDL;$(SolutionDir)include/SoLoud;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Engine/include/PhysX;$(SolutionDir)Engine/include/boost;$(SolutionDir)Engine/include/zlib;$(SolutionDir)Engine/include/MiniZip;$(SolutionDir)Engine/include/EnTT;$(SolutionDir)Engine/include/gainput;$(SolutionDir)Engine/include/SDL;$(SolutionDir)Engine/include/SoLoud;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ShowIncludes>false</ShowIncludes>
@@ -127,8 +129,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>minizip.lib;zlibstatic.lib;soloud.lib;gainputstatic-d.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;Game.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;glu32.lib;XInput.lib;Ws2_32.lib;PhysXCommon_64.lib;PhysX_64.lib;PhysXFoundation_64.lib;PhysXExtensions_static_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\lib; $(SolutionDir)\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Game.lib;zlibstatic.lib;minizip.lib;soloud.lib;gainputstatic-d.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;opengl32.lib;glu32.lib;XInput.lib;Ws2_32.lib;PhysXCommon_64.lib;PhysX_64.lib;PhysXFoundation_64.lib;PhysXExtensions_static_64.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;kernel32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Engine\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,6 +141,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Engine/include/PhysX;$(SolutionDir)Engine/include/boost;$(SolutionDir)Engine/include/zlib;$(SolutionDir)Engine/include/MiniZip;$(SolutionDir)Engine/include/EnTT;$(SolutionDir)Engine/include/gainput;$(SolutionDir)Engine/include/SDL;$(SolutionDir)Engine/include/SoLoud;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -177,7 +181,7 @@
     <ClCompile Include="TimeSystem.cpp" />
     <ClCompile Include="Folder.cpp" />
     <ClCompile Include="UserInterfaceSystem.cpp" />
-    <ClCompile Include="UserInterfaceSystem_SDL_GL.cpp" />
+    <ClCompile Include="UserInterfaceSystem_.cpp" />
     <ClCompile Include="WindowSystem.cpp" />
     <ClCompile Include="WindowSystem_SDL.cpp" />
     <ClCompile Include="WorldSystem.cpp" />
@@ -197,7 +201,8 @@
     <ClInclude Include="Quad.h" />
     <ClInclude Include="EventSystem.h" />
     <ClInclude Include="EventSystem_SDL.h" />
-    <ClInclude Include="Engine.h" />
+    <ClInclude Include="SystemsLocator.h" />
+    <ClInclude Include="ToffeeEngine.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RenderSystem.h" />
@@ -207,11 +212,10 @@
     <ClInclude Include="ResourceSystem_MiniZip.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Subsystem.h" />
-    <ClInclude Include="SystemsLocator.h" />
     <ClInclude Include="TimeSystem.h" />
     <ClInclude Include="Folder.h" />
     <ClInclude Include="UserInterfaceSystem.h" />
-    <ClInclude Include="UserInterfaceSystem_SDL_GL.h" />
+    <ClInclude Include="UserInterfaceSystem_.h" />
     <ClInclude Include="WindowEvents.h" />
     <ClInclude Include="WindowSystem.h" />
     <ClInclude Include="WindowSystem_SDL.h" />
@@ -219,7 +223,10 @@
     <ClInclude Include="WorldSystem_EnTT.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Engine.rc" />
+    <ResourceCompile Include="Engine1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

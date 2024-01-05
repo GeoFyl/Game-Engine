@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Cube.h"
 
-void Cube::CreateCube(Engine::Components::Mesh& mesh) {
+// Adapted from my 2nd year CMP203 coursework.
+
+void Cube::CreateCube(Toffee::Components::Mesh& mesh) {
 	mesh.vertex = std::move(std::vector<float>({	
 		-0.5, 0.5, 0.5,
 		-0.5, -0.5, 0.5,

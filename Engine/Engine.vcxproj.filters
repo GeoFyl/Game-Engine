@@ -60,6 +60,12 @@
     <Filter Include="Source Files\Subsystems\MiniZip">
       <UniqueIdentifier>{55278fa4-6fe5-46e9-830b-fd80adadff98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Subsystems\PhysX">
+      <UniqueIdentifier>{af8684f8-09aa-4e6f-88f5-08c038a2d732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Subsystems\PhysX">
+      <UniqueIdentifier>{49baf57e-01cc-4f10-8d05-9f6eef740ac4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -75,9 +81,6 @@
       <Filter>Source Files\Subsystems\SDL</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemsLocator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AudioSystem.cpp">
@@ -147,17 +150,20 @@
       <Filter>Source Files\Subsystem Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsSystem_PhysX.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Subsystems\PhysX</Filter>
     </ClCompile>
-    <ClCompile Include="UserInterfaceSystem_SDL_GL.cpp">
-      <Filter>Source Files\Subsystems\SDL</Filter>
+    <ClCompile Include="UserInterfaceSystem_.cpp">
+      <Filter>Source Files\Subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemsLocator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine.h">
+    <ClInclude Include="ToffeeEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core.h">
@@ -171,9 +177,6 @@
     </ClInclude>
     <ClInclude Include="AudioSystem_SoLoud.h">
       <Filter>Header Files\Subsystems\SoLoud</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemsLocator.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AudioSystem.h">
       <Filter>Header Files\Subsytem Interfaces</Filter>
@@ -232,9 +235,6 @@
     <ClInclude Include="UserInterfaceSystem.h">
       <Filter>Header Files\Subsytem Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="UserInterfaceSystem_SDL_GL.h">
-      <Filter>Header Files\Subsystems\SDL</Filter>
-    </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Header Files\Subsystems\GL Shapes</Filter>
     </ClInclude>
@@ -244,17 +244,26 @@
     <ClInclude Include="Sphere.h">
       <Filter>Header Files\Subsystems\GL Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsSystem_PhysX.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsSystem.h">
       <Filter>Header Files\Subsytem Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UserInterfaceSystem_.h">
+      <Filter>Header Files\Subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemsLocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem_PhysX.h">
+      <Filter>Header Files\Subsystems\PhysX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Engine.rc" />
+    <ResourceCompile Include="Engine1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\logo.ico" />
   </ItemGroup>
 </Project>

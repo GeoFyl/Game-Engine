@@ -1,21 +1,20 @@
 #pragma once
 
-namespace Engine::App {
-	/// <summary>
-	/// Interface to the application layer
-	/// This should be supplied by the Game project
-	/// </summary>
+namespace Toffee::App {
+	// Interface to the application layer
+	// This should be supplied by the application project
 	class Application
 	{
 	public:
-		
-		/// <summary>
-		/// Game logic
-		/// </summary>
-		/// <param name="dt">Time since the last Update</param>
+		// Initialise application
 		virtual void Start() = 0;
+		// Application logic
+		/// <param name="dt">Time since the last Update</param>
 		virtual void Update(double dt) = 0;
+		// Exit application
 		void Exit() { exit_state_ = -1; }
+
+		// For use by the engine
 		const int GetExitState() const { return exit_state_; }
 
 	protected:

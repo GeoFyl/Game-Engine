@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 
-namespace Engine::Internal {
+namespace Toffee::Internal {
 	/// <summary>
 	/// Base on SDL's Window Event ID, this enum is used for the abstraction
 	/// of window events we might need to handle
@@ -36,7 +36,7 @@ namespace Engine::Internal {
 		uint32_t	timestamp;					/**< In milliseconds, not populated at all! */
 		uint32_t	windowID;					/**< The associated window */
 		WindowEventID event;     /**< ::WindowEventID */
-		uint8_t		padding1;					//TODO: Check the padding on this
+		uint8_t		padding1;					
 		uint8_t		padding2;
 		uint8_t		padding3;
 		int32_t		data1;						/**< event dependent data */

@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "SystemsLocator.h"
 
-using namespace Engine::Internal;
+using namespace Toffee::Internal;
 
-void Engine::SystemsAPI::Provide(Subsystem* subsystem) {
+// Recieves a subsystem takes ownership via the relevant unique pointer.
+void Toffee::ToffeeAPI::Provide(Subsystem* subsystem) {
 	switch (subsystem->type_) {
 	case SubsytemType::RENDER:
 		render_system_ = std::unique_ptr<RenderSystem>(static_cast<RenderSystem*>(subsystem));
@@ -39,8 +40,7 @@ void Engine::SystemsAPI::Provide(Subsystem* subsystem) {
 	}
 }
 
-void Engine::SystemsAPI::InitialiseSubsystems() {
-	physics_system_->Initialise();
+void Toffee::ToffeeAPI::InitialiseSubsystems() {
 	ui_system_->Initialise();
 	resource_system_->Initialise();
 	audio_system_->Initialise();	
@@ -49,13 +49,17 @@ void Engine::SystemsAPI::InitialiseSubsystems() {
 	event_system_->Initialise();
 	input_system_->Initialise();
 	world_system_->Initialise();
+	physics_system_->Initialise();
 }
 
-void Engine::SystemsAPI::ShutDownSubsystems() {
-	audio_system_->Shutdown();
+void Toffee::ToffeeAPI::ShutDownSubsystems() {
 	physics_system_->Shutdown();
-	render_system_->Shutdown();
-
+	world_system_->Shutdown();
+	input_system_->Shutdown();
 	event_system_->Shutdown();
+	render_system_->Shutdown();
 	window_system_->Shutdown();
+	audio_system_->Shutdown();
+	resource_system_->Shutdown();
+	ui_system_->Shutdown();
 }

@@ -1,26 +1,27 @@
 #pragma once
 #include <chrono>
-namespace Engine::Internal {
+namespace Toffee::Internal {
 	typedef std::chrono::high_resolution_clock Clock;
 
-	/// <summary>
-	/// A simple time system
-	/// </summary>
+	// A simple time system
 	class TimeSystem {
 	public:
-		void Start();
-		/// <summary>
-		/// Call this when performing a game Update
-		/// </summary>
-		/// <returns>The delta time, in seconds, since the last frame</returns>
-		double Update();
-		/// <returns>The delta time, in seconds, since the last frame</returns>
+
+		// Returns the delta time, in seconds, since the last frame.
 		double GetDeltaTime() { return delta_time_; }
-		/// <returns>The current FPS based on the time since the last frame</returns>
+		// Returns the current FPS based on the time since the last frame.
 		double GetCurrentFPS() { return 1.f / delta_time_; }
-		/// <returns>The average FPS, updates every 500ms</returns>
+		// Returns the average FPS, updates every 500ms.
 		double GetAvgFPS() { return avg_fps_; }
 	private:
+		friend class Core;
+		// Start the clock.
+		void Start();
+		
+		// Called every frame.
+		// Returns the delta time, in seconds, since the last frame.
+		double Update();
+
 		Clock::time_point previous_time_;
 		double delta_time_;
 		double avg_fps_ = 0.f;

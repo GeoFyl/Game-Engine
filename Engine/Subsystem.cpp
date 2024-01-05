@@ -2,4 +2,4 @@
 #include "Subsystem.h"
 #include "SystemsLocator.h"
 
-void Engine::Internal::Subsystem::ProvideSystem(Subsystem* subsystem) { Engine::SystemsAPI::Provide(subsystem); }
+void Toffee::Internal::Subsystem::ProvideSystem(Subsystem* subsystem) { Toffee::ToffeeAPI::Provide(subsystem); }

@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Plane.h"
 
-void Plane::CreatePlane(Engine::Components::Mesh& mesh) {
+// Adapted from my 2nd year CMP203 coursework.
+
+void Plane::CreatePlane(Toffee::Components::Mesh& mesh) {
 	// Creates 400 by 400 grid
 	for (int x = -200; x < 200; x++) {
 		for (int z = -200; z < 200; z++) {

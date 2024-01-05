@@ -3,11 +3,11 @@
 #include "SystemsLocator.h"
 
 
-using namespace Engine::Internal;
+using namespace Toffee::Internal;
 
 EventSystem_SDL* event_SDL = new EventSystem_SDL;
 
-Engine::Internal::EventSystem_SDL::EventSystem_SDL() {
+Toffee::Internal::EventSystem_SDL::EventSystem_SDL() {
     ProvideSystem(this);
     event_SDL = nullptr;
 }
@@ -22,9 +22,12 @@ int EventSystem_SDL::Shutdown() {
 
 int EventSystem_SDL::ProcessEvents() {
 
+    // The current implementation of the input system requires windows messages.
+    // Extracts keyboard messages.
+    // Other implementations may not need this, so HandleInputEvent wouldn't be needed.
 #ifdef _WIN32||_WIN64
     MSG msg;
-    while (PeekMessage(&msg, reinterpret_cast<HWND>(SystemsAPI::Window()->GetWindowInfo().handle), WM_KEYFIRST, 0, PM_REMOVE | PM_QS_INPUT)) {
+    while (PeekMessage(&msg, reinterpret_cast<HWND>(ToffeeAPI::Window()->GetWindowInfo().handle), WM_KEYFIRST, 0, PM_REMOVE | PM_QS_INPUT)) {
             HandleInputEvent(&msg);
     }
 #endif
@@ -33,7 +36,7 @@ int EventSystem_SDL::ProcessEvents() {
     //While application is running
     int returnValue = 0;
   
-    //Standard SDL event system - go look at their documentation if you care!
+    //Standard SDL event system
     //Handle events on queue
     while (SDL_PollEvent(&e) != 0)
     {

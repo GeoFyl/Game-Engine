@@ -1,0 +1,11 @@
+Controls:
+- Right-click to start/pause simulation
+- WASD to roll ball
+- Q and E to rotate
+- Space to jump
+- F to toggle wireframe mode
+- L to toggle lighting
+- C and V to switch camera position
+- 1 and 2 to switch between scenes
+- Enter to play a sound (easier to hear it in scene 2)
+- Click on this text, cursor should warp to centre of screen"

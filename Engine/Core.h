@@ -1,10 +1,9 @@
 #pragma once
-
 #include "Application.h"
 #include "TimeSystem.h"
 #include <memory>
 
-namespace Engine::Internal {
+namespace Toffee::Internal {
 	class Core
 	{
 	public:
@@ -15,24 +14,21 @@ namespace Engine::Internal {
 		int		Run();
 
 	private:
-		void	OpenWindow(std::string name, int ScreenWidth, int ScreenHeight);
 
-		/// <summary>
-		/// Get the event handler to process any events
-		/// </summary>
-		/// <returns>-1 on a Quit event</returns>
+		// Process any events
 		int		ProcessEvents();
+
+		// Update anything which needs updated
 		int 	Update(double dt);
+
+		// Render
 		void	Render();
 
+		// Before exiting the program
 		void	Close();
 
 	private:
-		std::unique_ptr<Engine::App::Application> app_;
-
-
-		//Subsystems
-		TimeSystem time_system_;
+		std::unique_ptr<Toffee::App::Application> app_;
 	};
 
 

@@ -1,12 +1,9 @@
 #pragma once
 #include "pch.h"
-
-//#include "Engine.h"
 #include "Core.h"
 
-
 int main(int argc, char* argv[]) {
-    std::unique_ptr<Engine::Internal::Core> engine(new Engine::Internal::Core(argc, argv));
+    std::unique_ptr<Toffee::Internal::Core> engine(new Toffee::Internal::Core(argc, argv));
 
     return engine->Run();
 }

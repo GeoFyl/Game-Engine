@@ -3,7 +3,7 @@
 #include "SystemsLocator.h"
 #include <soloud_wav.h>
 
-using namespace Engine::Internal;
+using namespace Toffee::Internal;
 
 AudioSystem_SoLoud* audio_soloud = new AudioSystem_SoLoud;
 
@@ -12,24 +12,31 @@ AudioSystem_SoLoud::AudioSystem_SoLoud() {
 	audio_soloud = nullptr;
 }
 
+// Init soLoud
 int AudioSystem_SoLoud::Initialise() {
 	int result = soLoud_.init();
 	return result;
 }
 
+// Free memory
 int AudioSystem_SoLoud::Shutdown() {
 	soLoud_.deinit();
 	return 0;
 }
 
+// Retreive an audio source and start playing it
 void AudioSystem_SoLoud::Play(std::string name) {
-	SoLoud::Wav* source = reinterpret_cast<SoLoud::Wav*>(SystemsAPI::Resources()->GetResource(name));
-	if(source) soLoud_.play(*source);
+	SoLoud::Wav* source = reinterpret_cast<SoLoud::Wav*>(ToffeeAPI::Resources()->GetResource(name));
+	if(source) active_sounds_[name] = soLoud_.play(*source); // Added to map of currently playing sounds
 }
 
-//void AudioSystem_SoLoud::LoadSound(std::string name, std::string filename) {
-//	SoLoud::Wav* source = new SoLoud::Wav;
-//	std::string path = "../Game/" + filename;
-//	source->load(path.c_str());
-//	audioSources_[name] = source;
-//}
+// Stop a sound
+void AudioSystem_SoLoud::Stop(std::string name) {
+	// If sound is currently playing, stop it
+	if(active_sounds_.count(name)) soLoud_.stop(active_sounds_[name]);
+}
+
+// Stop all sounds 
+void Toffee::Internal::AudioSystem_SoLoud::StopAll() {
+	soLoud_.stopAll();
+}

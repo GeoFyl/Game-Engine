@@ -2,17 +2,17 @@
 #include "pch.h"
 #include "Subsystem.h"
 
-namespace Engine::Internal {
-    /// <summary>
-    /// Interface base class to audio system
-    /// </summary>
+namespace Toffee::Internal {
+    // Interface base class to audio system
     class AudioSystem : public Subsystem {
     public:
         AudioSystem() { type_ = SubsytemType::AUDIO; }
-        virtual void Play(std::string name) = 0;
-        // virtual void stop(std::string name)                               = 0;
-        // virtual void stopAll()                                            = 0;
-        //virtual void LoadSound(std::string name, std::string filename) = 0;
+        // Play an audio source
+        virtual void Play(std::string source) = 0;
+        // Stop an audio source
+        virtual void Stop(std::string source) = 0;
+        // Stop all audio
+        virtual void StopAll() = 0;
     };
 }
 

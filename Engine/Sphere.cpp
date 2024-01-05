@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Sphere.h"
 
-void Sphere::CreateSphere(Engine::Components::Mesh& mesh) {
+// Adapted from my 2nd year CMP203 coursework.
+
+void Sphere::CreateSphere(Toffee::Components::Mesh& mesh) {
 	const double pi = 3.14159265358979323846;
 
 	float thetaInterval = (pi * 2) / 100;

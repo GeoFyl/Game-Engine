@@ -2,7 +2,7 @@
 #include "InputSystem_Gainput.h"
 #include "SystemsLocator.h"
 
-using namespace Engine::Internal;
+using namespace Toffee::Internal;
 
 InputSystem_Gainput* input_gainput = new InputSystem_Gainput;
 
@@ -12,9 +12,11 @@ InputSystem_Gainput::InputSystem_Gainput() {
 }
 
 int InputSystem_Gainput::Initialise() {
+	// Initialise devices
 	keyboard_ = manager_.CreateDevice<gainput::InputDeviceKeyboard>();
 	mouse_ = manager_.CreateDevice<gainput::InputDeviceMouse>();
 
+	// Map toffee buttons to gainput buttons
 	int result;
 	result = map_.MapBool(static_cast<int>(Button::NUM_0), keyboard_, gainput::Key0);
 	result = map_.MapBool(static_cast<int>(Button::NUM_1), keyboard_, gainput::Key1);
@@ -93,35 +95,42 @@ int InputSystem_Gainput::Shutdown() {
 }
 
 void InputSystem_Gainput::Update() {
+	// Update gainput manager
 	manager_.Update();
 }
 
+// Returns whether a button is currently down.
 bool InputSystem_Gainput::IsDown(Button button) {
 	return map_.GetBool(static_cast<int>(button));
 }
 
+// Returns whether a button has just been pressed.
 bool InputSystem_Gainput::IsPressed(Button button) {
 	return map_.GetBoolIsNew(static_cast<int>(button));
 }
 
+// Returns whether a button has just been released.
 bool InputSystem_Gainput::IsReleased(Button button) {
 	return map_.GetBoolWasDown(static_cast<int>(button));
 }
 
-float InputSystem_Gainput::GetMouseX()
-{
-	
+// Get the mouse x coordinate relative to the window.
+// (0,0) is the top left of the window.
+float InputSystem_Gainput::GetMouseX() {
 	//For whatever reason, gainput gives the coordinates as negative values, so invert return value
 	return -map_.GetFloat(static_cast<int>(MouseAxis::MOUSE_X));
 }
 
-float InputSystem_Gainput::GetMouseY()
-{
+// Get the mouse y coordinate relative to the window.
+// (0,0) is the top left of the window.
+float InputSystem_Gainput::GetMouseY() {
 	//For whatever reason, gainput gives the coordinates as negative values, so invert return value
 	return -map_.GetFloat(static_cast<int>(MouseAxis::MOUSE_Y));
 }
 
-void Engine::Internal::InputSystem_Gainput::WarpMouse(int x, int y) {
+// Set position of the mouse pointer.
+// Windows only - other systems will need their own implementation
+void Toffee::Internal::InputSystem_Gainput::WarpMouse(int x, int y) {
 #ifdef _WIN32||_WIN64
 	tagPOINT screen_cursor_pos;
 	GetCursorPos(&screen_cursor_pos);
@@ -129,7 +138,11 @@ void Engine::Internal::InputSystem_Gainput::WarpMouse(int x, int y) {
 #endif
 }
 
+// Receive message and pass to gainput.
 void InputSystem_Gainput::HandleMessage(void* msg) {
+#ifdef _WIN32||_WIN64
+	// Windows only. Gainput has other functions for other systems.
 	manager_.HandleMessage(*reinterpret_cast<MSG*>(msg));
+#endif
 }
 

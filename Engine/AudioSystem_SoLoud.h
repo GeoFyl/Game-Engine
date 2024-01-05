@@ -1,22 +1,26 @@
 #pragma once
 #include "AudioSystem.h"
 #include <soloud_wav.h>
+#include <unordered_map>
 
-namespace Engine::Internal {
+namespace Toffee::Internal {
     class AudioSystem_SoLoud : public AudioSystem {
     public:
         AudioSystem_SoLoud();
+
+    private:
+        // Inherited from Subsystem
+
         int Initialise() final;
         int Shutdown() final;
 
-        void Play(std::string name);
-       // void stop(std::string name);
-       // void stopAll();
-        //void LoadSound(std::string name, std::string filename);
+        // See AudioSystem.h for function details
 
-    private:
+        void Play(std::string name) final;
+        void Stop(std::string name) final;
+        void StopAll() final;
 
         SoLoud::Soloud soLoud_;
-        //std::unordered_map<std::string, SoLoud::AudioSource*> audioSources_;
+        std::unordered_map<std::string, SoLoud::handle> active_sounds_;
     };
 }

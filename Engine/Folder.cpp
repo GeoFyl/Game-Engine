@@ -8,16 +8,19 @@ Folder::Folder(const unzFile& zip_handle, const std::string& real_root) :
 {
 }
 
+// Reads file into supplied buffer.
 int Folder::GetFile(const std::string& path, std::vector<char>& buffer)
 {
     // First check if the file exists locally 
-    std::ifstream file(("../Game/" + real_root_ + path).c_str(), std::ios::binary | std::ios::ate);
+    std::ifstream file((real_root_ + path).c_str(), std::ios::binary | std::ios::ate);
     if (file.good()) {
         std::streamsize size = file.tellg();
         file.seekg(0, std::ios::beg);
 
+        // Make sure buffer is big enough
         if (size > buffer.size()) buffer.resize(size);
 
+        // Read file into buffer
         if (file.read(buffer.data(), size))
         {
             file.close();
@@ -39,7 +42,6 @@ int Folder::GetFile(const std::string& path, std::vector<char>& buffer)
             int totalRead = 0;
             int read = 0;
             while ((read = unzReadCurrentFile(zip_handle_, buffer.data(), buffer.size())) > 0) {
-                //blocking
                 //Read all the bytes!
                 totalRead += read;
                 printf("READ: %d bytes \n", read);

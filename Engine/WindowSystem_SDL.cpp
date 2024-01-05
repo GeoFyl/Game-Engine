@@ -5,7 +5,7 @@
 #include "SDL.h"
 #include "SDL_syswm.h"
 
-using namespace Engine::Internal;
+using namespace Toffee::Internal;
 
 WindowSystem_SDL* window_SDL = new WindowSystem_SDL;
 
@@ -14,9 +14,7 @@ WindowSystem_SDL::WindowSystem_SDL() {
 	window_SDL = nullptr;
 }
 
-WindowSystem_SDL::~WindowSystem_SDL() {
-}
-
+// Initialise window flags
 int WindowSystem_SDL::Initialise() {
     flags_ = SDL_WindowFlags::SDL_WINDOW_SHOWN | SDL_WindowFlags::SDL_WINDOW_ALLOW_HIGHDPI | SDL_WindowFlags::SDL_WINDOW_RESIZABLE;
     int result = 0;
@@ -24,16 +22,14 @@ int WindowSystem_SDL::Initialise() {
     try {
         //Initialize SDL
         if (SDL_Init(SDL_INIT_VIDEO) < 0) throw;
-    #ifdef RENDERSYSTEM_OPENGL
         if (SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY) < 0) throw;
         if (SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1) < 0) throw;
         if (SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1) < 0) throw;
         if (SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8) < 0) throw;
         flags_ |= SDL_WindowFlags::SDL_WINDOW_OPENGL;
-    #endif // RENDERSYSTEM_OPENGL
     }
     catch (...) {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+        printf("SDL could not initialize. SDL_Error: %s\n", SDL_GetError());
         result = -1;
     }
 
@@ -45,23 +41,27 @@ int WindowSystem_SDL::Shutdown() {
 	return 0;
 }
 
+// Open the window. Set name and dimensions.
 int WindowSystem_SDL::OpenWindow(std::string name, int width, int height) {
     int result = 0;
 
     screenWidth_ = width;
     screenHeight_ = height;
 
+    // Open the window
     window_ = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth_, screenHeight_, flags_);
     if (window_ == nullptr) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         result = -1;
     }
 
+    // Make the rendering system create the renderer
     CreateRenderer();
 
     return result;
 }
 
+// Handle events
 void WindowSystem_SDL::HandleWindowEvent(WindowEvent& e) {
     switch (e.event) {
     case WindowEventID::WINDOWEVENT_SHOWN:
@@ -82,13 +82,13 @@ void WindowSystem_SDL::HandleWindowEvent(WindowEvent& e) {
         SDL_Log("Window %d resized to %dx%d",
             e.windowID, e.data1,
             e.data2);
-        Resize(e.data1, e.data2);
+        Resize(e.data1, e.data2); // Make the rendering system resize the viewport
         break;
     case WindowEventID::WINDOWEVENT_SIZE_CHANGED:
         SDL_Log("Window %d size changed to %dx%d",
             e.windowID, e.data1,
             e.data2);
-        Resize(e.data1, e.data2);
+        Resize(e.data1, e.data2); // Make the rendering system resize the viewport
         break;
     case WindowEventID::WINDOWEVENT_MINIMIZED:
         SDL_Log("Window %d minimized", e.windowID);
@@ -125,6 +125,8 @@ void WindowSystem_SDL::HandleWindowEvent(WindowEvent& e) {
     }
 }
 
+// Get data relating to the window. 
+// Returns HWND and device context but can be changed for other operating systems
 WindowInfo WindowSystem_SDL::GetWindowInfo() const
 {
     WindowInfo window_info;
@@ -140,9 +142,5 @@ WindowInfo WindowSystem_SDL::GetWindowInfo() const
 #endif
 
     return window_info;
-}
-
-void WindowSystem_SDL::ToggleVsync() {
-    vsync_ = !vsync_;
 }
 

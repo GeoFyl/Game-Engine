@@ -1,7 +1,8 @@
 #pragma once
-namespace Engine { class SystemsAPI; }
+namespace Toffee { class ToffeeAPI; }
 
-namespace Engine::Internal {
+namespace Toffee::Internal {
+
 	enum class SubsytemType {
 		RENDER,
 		AUDIO,
@@ -16,7 +17,6 @@ namespace Engine::Internal {
 
 	/// <summary>
 	/// Abstract interface for any Subsystem
-	/// They need to be initialised and shut down
 	/// </summary>
 	class Subsystem {
 	public:
@@ -24,7 +24,8 @@ namespace Engine::Internal {
 		virtual int Initialise()	= 0;
 		virtual int Shutdown()		= 0;
 
-		friend class Engine::SystemsAPI;
+		friend class Toffee::ToffeeAPI;
+		// Used by subsystems to register themselves.
 		void ProvideSystem(Subsystem* subsystem);
 		SubsytemType type_;
 	};

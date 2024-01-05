@@ -1,26 +1,36 @@
 #pragma once
-#include <Engine.h>
-#include <string>
+#include <ToffeeEngine.h>
 
-class Game : public Engine::App::Application
+class Game : public Toffee::App::Application
 {
 public:
-	Game();
+	// Required by the engine. Perform any initializations here.
 	void Start() override final;
+
+	// Required by the engine. Called every frame, your game logic goes here.
+	///<param name="dt">Time since the last Update</param>
 	void Update(double dt) override final;
-	//void Render() override final;
-
+	
 private:
+	// Your own functions and member variables should go here.
 
-	int window_width_, window_height_;
+	void FinishSetup();
+	void ProcessInput();
 
-	Engine::GameObject player_;
-	Engine::GameObject obj_;
-	UIElement_ID ui_info_;
-	UIElement_ID ui_fps_;
-	UIElement_ID ui_fps_count_;
+	Toffee::GameObject player_;
+	Toffee::GameObject pot_;
+	Toffee::UIElement_ID ui_info_ = -1;
+	Toffee::UIElement_ID ui_fps_ = -1;
+	Toffee::UIElement_ID ui_fps_count_ = -1;
+	Toffee::UIElement_ID ui_loading_ = -1;
 	float fps_count_time_ = 0;
 
-	std::string lorem[10] = { " Lorem", " ipsum", " dolor", " sit", " amet", " consectetur", " adipiscing", " elit", " sed", " do"};
-	int word = 0;
+	bool loaded_ = false;
 };
+
+//Create the application layer
+//See Application.h
+Toffee::App::Application* Toffee::App::CreateApp(int argc, char** argv)
+{
+	return new Game();
+}
