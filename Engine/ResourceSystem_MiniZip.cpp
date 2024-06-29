@@ -393,7 +393,7 @@ bool ResourceSystem_MiniZip::CreateTexture(std::string name, const char* buffer,
 	glBindTexture(GL_TEXTURE_2D, texture);
 	
 	// Create the texture from the pixel data from the sdl surface
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 1, SDL_ISPIXELFORMAT_ALPHA(surface->format->format) ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, SDL_ISPIXELFORMAT_ALPHA(surface->format->format) ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 	
 	// Free memory
 	SDL_FreeSurface(surface);
